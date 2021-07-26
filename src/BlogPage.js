@@ -10,6 +10,9 @@ export default function BlogPage ({ user }) {
   const [posts, setPosts] = useState([])
   useEffect(() => {
     const getData = async () => {
+      const data = await DataStore.query(Blog, p => p.name('eq', name))
+      const posts = await DataStore.query(Post, p => p.blogID('eq', data[0].id))
+      setPosts(posts)
     }
     getData()
   }, [])

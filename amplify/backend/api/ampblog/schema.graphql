@@ -1,0 +1,14 @@
+type Blog @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String!
+  Posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+}
+
+type Post @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, update, delete]}, {allow: private, operations: [create]}]) @key(name: "byBlog", fields: ["blogID"]) {
+  id: ID!
+  title: String!
+  content: String
+  owner: String!
+  blogID: ID
+}
+ 

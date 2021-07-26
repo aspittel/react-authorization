@@ -7,9 +7,9 @@ function SignIn () {
   return (
     <div>
       <h1>Hello!</h1>
-      <Link to='/home'>home</Link>
+      <Link to='/'>home</Link>
     </div>
   )
 }
 
-export default SignIn
+export default withAuthenticator(SignIn)
